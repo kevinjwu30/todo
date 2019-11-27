@@ -21,7 +21,7 @@
 
     var doneValue = Boolean($(e.target).is(':checked'));
 
-let task = {
+var task = {
   done: doneValue
 }
      $.ajax({
