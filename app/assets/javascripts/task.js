@@ -59,8 +59,7 @@ var task = {
         $('.toggle').change(toggleTask);
     });
 
-
-    $('#new-form').submit(function(event) {
+  $('#new-form').submit(function(event) {
       event.preventDefault();
       var textbox = $('.new-todo');
       var payload = {
@@ -68,21 +67,12 @@ var task = {
           title: textbox.val()
         }
       };
-
-      $.ajax({
-        method: "POST",
-        url: "/tasks",
-        data: payload
-      }).done(function( data ) {
-          
-       var htmlString = taskHtml(data);
-              var ulTodos = $('.todo-list');
-              ulTodos.append(htmlString);
-              $('.toggle').click(toggleTask);
-                  $('.new-todo').val('');
-        });
-
-    
+      $.post("/tasks", payload).success(function(data) {
+        var htmlString = taskHtml(data);
+        var ulTodos = $('.todo-list');
+        ulTodos.append(htmlString);
+        $('.toggle').click(toggleTask);
+      });
     });
 
   });
